@@ -5,6 +5,3 @@ Integrantes del equipo:
 221198 - Jesus Alejandro Guillen Luna
 
 
-
-npm install puppeteer@latest whatsapp-web.js@latest
-npm install whatsapp-web.js@latest
