@@ -14,7 +14,7 @@ const createPaymentUseCase = new CreatePaymentUseCase(mercadoPagoClient, payment
 const processWebhookUseCase = new ProcessWebhookUseCase(paymentRepository, emailService);
 
 // Instanciar el controlador
-const paymentController = new PaymentController(createPaymentUseCase, paymentRepository, processWebhookUseCase, mercadoPagoClient);
+const paymentController = new PaymentController(createPaymentUseCase, paymentRepository, processWebhookUseCase);
 
 const router = express.Router();
 
@@ -25,6 +25,6 @@ router.post('/create', (req, res) => paymentController.createPayment(req, res));
 router.get('/status/:id', (req, res) => paymentController.getPaymentStatus(req, res));
 
 // Ruta para el webhook de Mercado Pago
-router.post('/webhook', (req, res) => paymentController.handleWebhook(req, res));
+router.post('/webhook/mercadopago', (req, res) => paymentController.handleWebhook(req, res));
 
 export default router;

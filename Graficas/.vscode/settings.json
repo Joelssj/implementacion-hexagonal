@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./src/Grafica_Sleep/infraestructure/adapter",
+        "./src/Grafica_Sleep/infraestructure"
+    ]
+}

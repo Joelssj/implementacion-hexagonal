@@ -13,6 +13,8 @@ export interface UsersRepository {
 
     // Modificar `save` para que acepte solo `correo` y `password`
     save(userData: { correo: string; password: string }): Promise<User>;
+
+   createUserEvent(userUuid: string): Promise<void>;
 }
 
 

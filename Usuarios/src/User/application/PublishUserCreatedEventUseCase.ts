@@ -1,3 +1,6 @@
+
+
+
 // src/Users/application/PublishUserCreatedEventUseCase.ts
 import { UsersRepository } from '../domain/UsersRepository';
 import { RabbitMQPublisher } from '../infraestructure/rabbitmq/RabbitMQPublisher';
@@ -75,22 +78,4 @@ export class PublishUserCreatedEventUseCase {
 
 
 
-/*import { UsersRepository } from '../domain/UsersRepository';
-import { RabbitMQPublisher } from '../infraestructure/rabbitmq/RabbitMQPublisher';
-import { UserCreatedEvent } from '../domain/events/UserCreatedEvent';
-
-export class PublishUserCreatedEventUseCase {
-  constructor(
-    private userRepository: UsersRepository,
-    private publisher: RabbitMQPublisher
-  ) {}
-
-  async run(userData: { correo: string; password: string }) { // Usar 'correo'
-    const user = await this.userRepository.save(userData);
-    const event = new UserCreatedEvent(user.uuid, user.correo); // Usar 'correo'
-    await this.publisher.publishUserCreatedEvent(event);
-    return user;
-  }
-}
-*/
 

@@ -5,31 +5,24 @@ export class UpdateUserByUuidController {
     constructor(private readonly updateUserByUuidUseCase: UpdateUserByUuidUseCase) {}
 
     async run(req: Request, res: Response): Promise<Response> {
+        const { correo, currentPassword, password, confirmPassword } = req.body;
         const { uuid } = req.params;
-        const { correo, password, confirmPassword, isActive, notificationPreference } = req.body;
 
-        // Validar que `uuid`, `correo`, `password`, y `confirmPassword` se hayan enviado
-        if (!uuid || !correo || !password || !confirmPassword) {
+        // Validar que `uuid`, `correo`, `currentPassword`, `password`, y `confirmPassword` se hayan enviado
+        if (!uuid || !correo || !currentPassword || !password || !confirmPassword) {
             return res.status(400).json({
-                error: "Los campos 'uuid', 'correo', 'password', y 'confirmPassword' son obligatorios."
-            });
-        }
-
-        // Validar la preferencia de notificación si se proporciona
-        if (notificationPreference && !['email', 'whatsapp'].includes(notificationPreference)) {
-            return res.status(400).json({
-                error: "La preferencia de notificación debe ser 'email' o 'whatsapp' si se proporciona."
+                error: "Los campos 'uuid', 'correo', 'currentPassword', 'password', y 'confirmPassword' son obligatorios."
             });
         }
 
         try {
+            // Ejecutar el caso de uso con solo los campos necesarios
             await this.updateUserByUuidUseCase.run(
                 uuid,
                 correo,
+                currentPassword,  // Contraseña actual para validación
                 password,
-                confirmPassword, // Agregamos `confirmPassword` para verificar en el caso de uso
-                isActive ?? null, // Pasar `null` si `isActive` no está definido
-                notificationPreference ?? null // Pasar `null` si `notificationPreference` no está definido
+                confirmPassword  // Confirmación de la nueva contraseña
             );
             return res.status(200).json({ message: "Usuario actualizado correctamente" });
         } catch (error: unknown) {

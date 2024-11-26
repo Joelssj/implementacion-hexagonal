@@ -19,7 +19,7 @@ export class RabbitMQConsumer {
   // Consumidor para eventos de user.created
   async consumeUserCreatedEvent() {
     const channel = await RabbitMQService.getChannel();
-    const queue = 'user.created';
+    const queue = 'user.created'; 
 
     await channel.assertQueue(queue, { durable: true });
     console.log(`✔️ Escuchando eventos en la cola ${queue} para usuarios`);

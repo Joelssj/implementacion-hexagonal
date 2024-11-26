@@ -69,9 +69,9 @@ export class MySQLPaymentRepository implements PaymentRepository {
 
 
 
+/*
 
-
-/*import { Payment } from '../../domain/Payment';
+import { Payment } from '../../domain/Payment';
 import { PaymentRepository } from '../../domain/PaymentRepository';
 import { query } from '../../../database/mysql/mysql';  // Tu conexión a la base de datos
 

@@ -111,6 +111,12 @@ export class PgUsersRepository implements UsersRepository {
         await this.saveUser(user);
         return user;
     }
+        async createUserEvent(userUuid: string): Promise<void> {
+        const message = { userUuid };
+
+
+        console.log("📤 Evento de usuario publicado:", message);
+    }
 }
 
 

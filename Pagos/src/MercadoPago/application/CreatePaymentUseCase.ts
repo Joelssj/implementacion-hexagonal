@@ -41,4 +41,3 @@ export class CreatePaymentUseCase {
       return paymentResponse.init_point;
   }
 }  
-

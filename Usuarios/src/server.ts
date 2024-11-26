@@ -8,6 +8,10 @@ import { RabbitMQService } from "./User/infraestructure/rabbitmq/RabbitMQService
 import { UserActivatedConsumer } from "./User/infraestructure/rabbitmq/UserActivatedConsumer"; // Asegúrate de tener esta importación correcta
 import { usersRepository } from "./User/infraestructure/dependencies/dependencies";
 import { profilePictureRouter } from "./ProfilePicture/infraestructure/routes/routes";
+import { passwordResetRouter } from "./PasswordReset/infraestructure/routes/passwordResetRouter";
+import { commentRouter } from "./WsComunidad/infraestructure/routes/commentRouter";
+
+
 
 
 const app = express();
@@ -21,6 +25,8 @@ app.use(cors());
 app.use("/api/v1/lead", leadRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/profile", profilePictureRouter);
+app.use("/api/v1/reset", passwordResetRouter);
+app.use("/api/v1/comments", commentRouter);
 
 // Inicializar conexión con RabbitMQ y consumidor
 async function initializeRabbitMQ() {
@@ -45,6 +51,18 @@ app.listen(port, host, async () => {
   signale.success(`Server online in port ${port}`);
   await initializeRabbitMQ(); // Llamada para conectar a RabbitMQ e inicializar el consumidor
 });
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -8,3 +8,4 @@ export class Webhook {
         public updatedAt: Date,
     ) {}
 }
+

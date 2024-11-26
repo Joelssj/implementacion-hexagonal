@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+/*import { Request, Response } from "express";
 import { CreatePaymentUseCase } from "../../application/CreatePaymentUseCase";
 import { PaymentRepository } from "../../domain/PaymentRepository";
 import { ProcessWebhookUseCase } from "../../application/ProcessWebhookUseCase";
@@ -90,11 +90,11 @@ export class PaymentController {
     private async updatePaymentStatus(paymentId: string, status: string): Promise<void> {
         await this.paymentRepository. updatePaymentStatus(paymentId, status);
     }
-}
+}*/
 
 
 
-/*
+
 import { Request, Response } from "express";
 import { CreatePaymentUseCase } from "../../application/CreatePaymentUseCase";
 import { PaymentRepository } from "../../domain/PaymentRepository";
@@ -170,4 +170,4 @@ export class PaymentController {
         }
     }
 }
-*/
+
