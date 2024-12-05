@@ -1,7 +1,7 @@
 import { MercadoPagoClient } from "../infrastructure/adapters/MercadoPagoClient";
 import { PaymentRepository } from "../domain/PaymentRepository";
 import { Payment } from "../domain/Payment";
-import { EmailService } from "../infrastructure/services/EmailService"; 
+import { EmailService } from "../infrastructure/services/EmailService";
 
 export class CreatePaymentUseCase {
     private readonly mercadoPagoClient: MercadoPagoClient;
@@ -14,30 +14,44 @@ export class CreatePaymentUseCase {
         this.emailService = emailService;
     }
 
-    async run(leadId: number, email: string, amount: number): Promise<string> {
-      const paymentResponse = await this.mercadoPagoClient.createPayment(email, amount);
-  
+    async run(userUuid: string, correo: string, amount: number): Promise<string> {
+        const paymentResponse = await this.mercadoPagoClient.createPayment(correo, amount);
 
-      const items = [
-          {
-              title: "Suscripción",
-              quantity: 1,
-              unit_price: amount
-          }
-      ];
-  
+        const items = [
+            {
+                title: "Suscripción",
+                quantity: 1,
+                unit_price: amount
+            }
+        ];
 
-      const payment = new Payment(
-          paymentResponse.id,        
-          items,                    
-          email,                    
-          leadId.toString(),        
-          "pending"                  
-      );
-  
+        const payment = new Payment(
+            paymentResponse.id,        
+            items,                    
+            correo,                    
+            userUuid,        
+            "pending"                   
+        );
 
-      await this.paymentRepository.savePayment(payment);
-  
-      return paymentResponse.init_point;
-  }
-}  
+        await this.paymentRepository.savePayment(payment);
+
+        return paymentResponse.init_point;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

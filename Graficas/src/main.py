@@ -1,56 +1,41 @@
-import sys
-import os
+# from Grafica_sentimiento.routes import create_app as create_app_sentimiento
+# from Grafica_sueño.routes import create_app as create_app_sueno
 
-# Agregar la carpeta raíz al PYTHONPATH dinámicamente
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# def create_app():
+#     # Crear ambas aplicaciones Flask y unirlas
+#     app_sentimiento = create_app_sentimiento()
+#     app_sueno = create_app_sueno()
 
-import threading
-from flask import Flask, jsonify
-from Grafica_Sleep.infraestructure.consumidor import start_rabbitmq_consumer
-from Grafica_Sleep.infraestructure.routes.prediction_routes import prediction_bp
-from Grafica_Sleep.infraestructure.routes.graph_routes import graph_bp
-from Grafica_Sleep.infraestructure.routes.day_routes import day_bp
-from Grafica_feeling.infraestructure.routes.feeling_routes import feeling_bp
-from dotenv import load_dotenv
+#     # Combinar ambas aplicaciones en una sola (se usará Blueprint)
+#     from flask import Flask
 
-# Cargar variables de entorno
-load_dotenv()
+#     app = Flask(__name__)
 
-# Crear la aplicación Flask
-app = Flask(__name__)
+#     # Registrar Blueprints de cada entidad
+#     app.register_blueprint(app_sentimiento, url_prefix='/emociones')
+#     app.register_blueprint(app_sueno, url_prefix='/sueno')
 
-# Registrar blueprints
-app.register_blueprint(prediction_bp)  # Rutas de predicción
-app.register_blueprint(graph_bp)       # Rutas para gráficas
-app.register_blueprint(day_bp)         # Rutas para emociones diarias
-app.register_blueprint(feeling_bp)     # Rutas para sentimientos
+#     return app
 
-@app.route("/")
-def index():
-    """
-    Ruta principal para verificar el estado de la API.
-    """
-    return jsonify({
-        "message": "Bienvenido a la API de predicción de emociones y sentimientos.",
-        "status": "running"
-    })
+# if __name__ == "__main__":
+#     app = create_app()  # Crear la aplicación unificada
+#     app.run(debug=True, host='0.0.0.0', port=5000)
 
-def run_flask():
-    """
-    Inicia la aplicación Flask.
-    """
-    flask_port = int(os.getenv("FLASK_PORT", 5000))  # Puerto configurado en .env
-    app.run(debug=True, port=flask_port, use_reloader=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+from Grafica_sentimiento.routes import create_app
 
 if __name__ == "__main__":
-    # Crear hilos para Flask y RabbitMQ
-    flask_thread = threading.Thread(target=run_flask)
-    rabbitmq_thread = threading.Thread(target=start_rabbitmq_consumer)
-
-    # Iniciar los hilos
-    flask_thread.start()
-    rabbitmq_thread.start()
-
-    # Esperar a que los hilos terminen
-    flask_thread.join()
-    rabbitmq_thread.join()
+    app = create_app()
+    app.run(debug=True, host='0.0.0.0', port=5000)

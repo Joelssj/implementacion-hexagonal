@@ -23,24 +23,3 @@ app.listen(port, host, () => {
 });
 
 
-
-
-/*import { Signale } from "signale";
-import express from "express";
-import { paymentRouter } from "./MercadoPago/infrestructure/routes/paymentRouter";
-import 'dotenv/config';
-import cors from 'cors';
-
-const app = express();
-const signale = new Signale();
-app.use(express.json());
-app.use(cors());
-app.use("/api/v1/payment", paymentRouter);
-
-const port = 3002;
-const host = '0.0.0.0';
-
-app.listen(port, host, () => {
-  signale.success("Server online in port 3001");
-});
-*/

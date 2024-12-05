@@ -6,6 +6,7 @@ export class Task {
     constructor(
         public readonly id: string,
         public readonly userUuid: string,
+        public readonly taskName: string,
         public readonly type: TaskType,
         public readonly priority: Priority,
         public readonly date: string,

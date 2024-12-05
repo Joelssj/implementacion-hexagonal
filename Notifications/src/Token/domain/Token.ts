@@ -10,13 +10,3 @@ export class Token {
 }
 
 
-/*
-export class Token {
-    constructor(
-        public uuid: string,
-        public userUuid: string,
-        public token: string,
-        public expiresAt: Date
-    ) {}
-}
-*/
